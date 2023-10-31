@@ -1,5 +1,6 @@
 package com.example.flo
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -16,32 +17,28 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
+
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_FLO)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initBottomNavigation()
 
-        val song = Song(binding.mainMiniPlayerTitleTv.text.toString(), binding.mainMiniPlayerSingerTv.text.toString())
-        activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result ->
-            if (result.resultCode == RESULT_OK) {
-                    val data = result.data
-                    if (data != null) {
-                        val message = data.getStringExtra("message")
-                        Log.d("message", message!!)
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+        //Song 변수 초기화
+        val song = Song(binding.mainMiniPlayerTitleTv.text.toString(), binding.mainMiniPlayerSingerTv.text.toString(),0, 60, false)
 
 
-        //intent : activity에서 사용하는 택배 상자 -> data를 담아서 보냄
+//        //intent : activity에서 사용하는 택배 상자 -> data를 담아서 보냄
         binding.mainPlayerCl.setOnClickListener{
-          var intent = Intent(this, SongActivity::class.java)
+          val intent = Intent(this, SongActivity::class.java)
             intent.putExtra("title", song.title)
             intent.putExtra("singer", song.singer)
+            intent.putExtra("second", song.second)
+            intent.putExtra("playTime", song.playTime)
+            intent.putExtra("singer", song.isPlaying)
             activityResultLauncher.launch(intent)
 
         }
