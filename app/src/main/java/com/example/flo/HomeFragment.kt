@@ -2,10 +2,12 @@ package com.example.flo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -18,21 +20,29 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.homeTodaySongAlbumIv.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm,AlbumFragment()).commitAllowingStateLoss()
-            //homefragment는 mainactivity에 있는 하나의 조각, 그 조각을 어디서 변경하는지 써줌
 
             var albumFragment = AlbumFragment()
             var bundle = Bundle()
-            val imageId = R.id.home_today_song_album_iv
-            bundle.putInt("imageId",imageId )
-            albumFragment.arguments = bundle
+           // val imageId = R.drawable.img_album_exp
+            //Log.d("미리","${imageId}")
+            //today_song_album_iv를 albumFragment로 전달
+//            Drawble drawble = getResources().getDrawble(
+//                R.drawable.img_album_exp
+//            )
+//            bundle.putInt("imageId",imageId )
+//            albumFragment.arguments = bundle
 
             activity?.supportFragmentManager!!.beginTransaction()
-                .replace(R.id.album_image_iv, albumFragment)
+                .replace(R.id.main_frm, albumFragment)
                 .commit()
-        }
 
+        //리스트 안에 fragment 추가
+        val bannerAdapter = BannerVPAdapter(this)
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+        binding.homeBannerVp.adapter = bannerAdapter
+        //뷰페이저가 좌우로 스크롤 될 수 있도록 지정
+        binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
 
         

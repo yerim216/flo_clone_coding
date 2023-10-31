@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp" />
-    
+
     <ImageButton
         android:id="@+id/song_player_more_ib"
         android:layout_width="25dp"
@@ -54,7 +54,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp" />
-    
+
     <TextView
         android:id="@+id/song_title_tv"
         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="130dp" />
-    
+
     <TextView
         android:id="@+id/song_artist_name_tv"
         android:layout_width="20dp"
@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"/>
-    
+
     <ImageButton
         android:id="@+id/song_artist_arrow_ib"
         android:layout_width="15dp"
@@ -139,6 +139,24 @@
         app:layout_constraintTop_toBottomOf="@id/song_lyrics_tv"
         android:layout_marginLeft="80dp"
         />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:progress="0"
+        android:progressTint="@color/transparent"
+        android:max="100000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/song_like_ib" />
+
+
     <ImageButton
         android:id="@+id/song_share_instagram_ib"
         android:layout_width="40dp"
@@ -252,22 +270,6 @@
         app:layout_constraintBottom_toTopOf="@id/song_player_related_ib"
         android:layout_marginBottom="30dp"
         android:visibility="invisible"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

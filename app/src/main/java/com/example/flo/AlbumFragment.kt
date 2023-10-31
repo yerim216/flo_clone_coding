@@ -8,11 +8,13 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.flo.databinding.FragmentAlbumBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 //fragment는 fragment 기능을 사용할 수 있게 해주는 fragment 클래스를 상속받음
 class AlbumFragment : Fragment() {
-    lateinit var binding: FragmentAlbumBinding
+    private lateinit var binding: FragmentAlbumBinding
 
+    private val information = arrayListOf("수록곡", "상세정보", "영상")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,13 +34,23 @@ class AlbumFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, homeFragment)
                 .commitAllowingStateLoss()
+
         }
 
-        binding.linearLayoutSonglist.setOnClickListener {
-            Toast.makeText(activity, "LILAC", Toast.LENGTH_SHORT).show()
-        }
-
+//        binding.linearLayoutSonglist.setOnClickListener {
+//            Toast.makeText(activity, "LILAC", Toast.LENGTH_SHORT).show()
+//        }
+        val albumAdapter = AlbumVPAdapter(this)
+        binding.albumContentVp.adapter = albumAdapter
+        TabLayoutMediator(binding.albumContentTb, binding.albumContentVp){
+            tab, position ->
+            tab.text = information[position]
+        }.attach()
         return binding.root
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }
